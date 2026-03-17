@@ -379,9 +379,8 @@
   <p><strong>3. Tool Bottleneck Model (TBM).</strong> Selected tool outputs are rasterized into multi-channel spatial maps, concatenated, and passed through a CNN predictor. Trained with <em>tool knockout augmentation</em>, the TBM learns to handle any arbitrary subset of tools at inference time. All tools are frozen; only the TBM is learned.</p>
 
   <figure class="figure">
-    <!-- Replace with: <img src="figure1.png" alt="TBF Overview"> -->
-    <div class="figure-placeholder">Figure 1 — replace with your image</div>
-    <figcaption>
+      <img src="tbm_fig.jpg" alt="TBF Overview">
+      <figcaption>
       <strong>Figure 1.</strong> Overview of the Tool Bottleneck Framework. A VLM selects tools from a pre-specified toolbox of clinically-relevant tools. These tools are passed to a Tool Bottleneck Model, which composes and fuses the tool outputs to make a prediction.
     </figcaption>
   </figure>
