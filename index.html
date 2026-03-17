@@ -3,177 +3,515 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Christina Liu – Personal Website</title>
+  <title>Christina Liu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --ink: #1a1a2e;
+      --ink-soft: #3d3d5c;
+      --ink-muted: #8888aa;
+      --accent: #b5874a;
+      --accent-light: #f5ede0;
+      --bg: #fafaf8;
+      --bg-warm: #f4f2ec;
+      --rule: #e2ddd6;
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: Georgia, serif;
-      margin: 0;
-      padding: 0;
-      background: #ffffff;
-      color: #222;
-      line-height: 1.6;
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.7;
+      font-weight: 300;
     }
-    header {
+
+    /* ── FADE-IN ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
       display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 2rem 1rem;
-      border-bottom: 1px solid #ddd;
-      background: #f7f7f7;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2.5rem;
+      height: 54px;
+      background: rgba(250,250,248,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
     }
-    .profile-pic {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
+    .topbar-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .topbar-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+    .topbar-links a {
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .topbar-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 120px 0 70px;
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 3.5rem;
+      align-items: start;
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+    }
+
+    .hero-photo-wrap {
+      position: relative;
+    }
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      top: 10px; left: 10px;
+      width: 100%; height: 100%;
+      border: 1.5px solid var(--accent);
+      border-radius: 2px;
+      z-index: 0;
+    }
+    .hero-photo {
+      position: relative;
+      z-index: 1;
+      width: 180px;
+      height: 180px;
       object-fit: cover;
       object-position: 50% 70%;
-      margin-right: 2rem;
-      border: 2px solid #ccc;
+      border-radius: 2px;
+      display: block;
+      filter: grayscale(10%);
     }
-    header .intro {
-      max-width: 600px;
+
+    .hero-text { padding-top: 0.5rem; }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-      color: #004080;
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.4rem;
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 0.8rem;
     }
-    header h2 {
-      margin: 0.5rem 0 0;
-      font-size: 1.1rem;
-      font-weight: normal;
-      color: #444;
+
+    .hero-desc {
+      font-size: 0.93rem;
+      color: var(--ink-soft);
+      max-width: 520px;
+      margin-bottom: 1.5rem;
     }
-    main {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+    .hero-desc a {
+      color: var(--ink-soft);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--accent);
     }
-    section {
+    .hero-desc a:hover { color: var(--accent); }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.5rem 1.1rem;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .cta-link.primary {
+      background: var(--ink);
+      color: var(--white);
+    }
+    .cta-link.primary:hover { background: var(--accent); }
+    .cta-link.secondary {
+      border: 1px solid var(--rule);
+      color: var(--ink-soft);
+      background: transparent;
+    }
+    .cta-link.secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── MAIN CONTENT ── */
+    .content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2.5rem 4rem;
+    }
+
+    .section-rule {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
       margin-bottom: 2rem;
     }
-    h3 {
-      margin-bottom: 0.5rem;
-      font-size: 1.3rem;
-      color: #004080;
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      white-space: nowrap;
     }
-    ul {
-      list-style: none;
-      padding: 0;
+    .section-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
     }
-    ul li {
-      margin-bottom: 1rem;
+
+    section { margin-bottom: 3.5rem; }
+
+    /* ── ABOUT ── */
+    .about-text {
+      font-size: 1rem;
+      color: var(--ink-soft);
+      max-width: 680px;
+      line-height: 1.8;
     }
-    .links a {
-      margin-right: 1rem;
-      text-decoration: none;
-      color: #004080;
-    }
-    .links a:hover {
+    .about-text a {
+      color: var(--ink-soft);
       text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--rule);
+      transition: color 0.2s, text-decoration-color 0.2s;
     }
-    footer {
-      text-align: center;
-      font-size: 0.85rem;
-      color: #666;
-      padding: 1rem;
-      border-top: 1px solid #ddd;
-      margin-top: 2rem;
+    .about-text a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+
+    /* ── PUBLICATIONS ── */
+    .pub-list { list-style: none; display: flex; flex-direction: column; gap: 1.75rem; }
+
+    .pub-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0 1.5rem;
+      padding: 1.4rem 1.5rem;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .authors {
-      color: #555;
-      font-size: 0.95rem;
-      margin: 0.15rem 0 0.25rem;
+    .pub-item:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 20px rgba(181,135,74,0.08);
     }
-    .me {
-    text-decoration: underline;
-    font-weight: 500; /* optional, adds a little emphasis */
+    .pub-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.88rem;
+      color: var(--ink-muted);
+      padding-top: 0.1rem;
+      min-width: 36px;
+      text-align: right;
     }
-    .teaching-list .course-title { font-weight: 600; }
-    .teaching-list .role { color: #444; margin-left: 0.35rem; }
-    .teaching-list .meta { margin-left: 0.5rem; }
-    .badge {
-      display: inline-block;
+    .pub-body {}
+    .pub-title {
+      font-size: 0.94rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.45;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .pub-authors {
+      font-size: 0.83rem;
+      color: var(--ink-muted);
+      margin-bottom: 0.25rem;
+    }
+    .pub-authors .me {
+      color: var(--ink-soft);
+      font-weight: 400;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .pub-venue {
       font-size: 0.8rem;
-      background: #eef5ff;
-      color: #004080;
-      padding: 0.1rem 0.5rem;
-      border-radius: 999px;
-      border: 1px solid #cfe0ff;
-      margin-right: 0.25rem;
+      color: var(--ink-muted);
+      font-style: italic;
     }
-    .teaching-list .desc { color: #555; margin-top: 0.25rem; }
+    .pub-equal {
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      font-style: italic;
+      margin-bottom: 0.2rem;
+    }
+    .pub-link {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+    }
+    .pub-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 0.15rem 0.55rem;
+      border-radius: 2px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+
+    /* ── TEACHING ── */
+    .teaching-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+    .teaching-card {
+      padding: 1.1rem 1.3rem;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .teaching-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 3px 14px rgba(181,135,74,0.08);
+    }
+    .teaching-term {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    .teaching-course {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 1.6rem 2.5rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .hero { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-photo-wrap { width: fit-content; }
+      .hero-name { font-size: 2.6rem; }
+      .topbar { padding: 0 1.2rem; }
+      .topbar-links { gap: 1rem; }
+      .hero { padding-left: 1.2rem; padding-right: 1.2rem; }
+      .content { padding-left: 1.2rem; padding-right: 1.2rem; }
+      .pub-item { grid-template-columns: 1fr; gap: 0.3rem; }
+      .pub-year { text-align: left; }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <img src="headshot.jpg" alt="Christina Liu" class="profile-pic" />
-    <div class="intro">
-      <h1>Christina Liu</h1>
-      <h2>Undergraduate Student · California Institute of Technology</h2>
-      <div class="links">
-        <a href="https://linkedin.com/in/christina--liu" target="_blank">LinkedIn</a>
-        <a href="https://scholar.google.com/citations?user=z6kD090AAAAJ&hl=en" target="_blank">Google Scholar</a>
-        <a href="cv.pdf" target="_blank">CV</a>
+
+  <!-- TOP BAR -->
+  <nav class="topbar">
+    <a class="topbar-name" href="#">Christina Liu</a>
+    <ul class="topbar-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="cv.pdf" target="_blank">CV</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero fade-up">
+    <div class="hero-photo-wrap">
+      <img src="headshot.jpg" alt="Christina Liu" class="hero-photo" />
+    </div>
+    <div class="hero-text">
+      <p class="hero-eyebrow">Computer Science · Caltech</p>
+      <h1 class="hero-name">Christina<br>Liu</h1>
+      <div class="hero-cta-row">
+        <a class="cta-link primary" href="https://linkedin.com/in/christina--liu" target="_blank">LinkedIn</a>
+        <a class="cta-link secondary" href="https://scholar.google.com/citations?user=z6kD090AAAAJ&hl=en" target="_blank">Google Scholar</a>
+        <a class="cta-link secondary" href="cv.pdf" target="_blank">CV</a>
       </div>
     </div>
-  </header>
+  </div>
 
-  <main>
-    <section>
-      <h3>About Me</h3>
-      <p>
-        I am a fourth-year Computer Science student at <strong>Caltech</strong> and a member of the
+  <!-- MAIN -->
+  <div class="content">
+
+    <!-- ABOUT -->
+    <section id="about" class="fade-up">
+      <div class="section-rule"><span class="section-label">About</span></div>
+      <p class="about-text">
+        I am a fourth-year Computer Science student at <strong>Caltech</strong>, where I am a member of the
         <a href="https://vision.caltech.edu" target="_blank" rel="noopener noreferrer">Caltech Vision Lab</a>.
-        My work spans <em>machine learning, computer vision, medical imaging, and neuroscience</em>, focusing on
-        multimodal models that connect behavior, neural signals, and images for early disease detection and
-        clinical deployment.
-
-        I am grateful to be supported by the  <a href="https://www.mellon.org/mmuf" target="_blank" rel="noopener noreferrer">Mellon Mays Undergraduate Fellowship</a>.
+        I am also a member of the <a href="https://shahlab.stanford.edu" target="_blank" rel="noopener noreferrer">Stanford Translational AI Lab</a>,
+        and will be joining <strong>Stanford University</strong> as a PhD student in Computer Science in Fall 2026.
+        I am supported by the <a href="https://www.mellon.org/mmuf" target="_blank" rel="noopener noreferrer">Mellon Mays Undergraduate Fellowship</a> for my research at Caltech.
+      </p>
+      <p class="about-text" style="margin-top: 1rem;">
+        My research interests lie broadly within AI systems and world models for biomedicine and neuroscience.
       </p>
     </section>
 
-  <section>
-    <h3>Research & Publications</h3>
-    <ul>
-      <li>
-        <a href="https://www.arxiv.org/abs/2512.21414" target="_blank">
-        <strong>A Tool Bottleneck Framework for Clinically-Informed and Interpretable Medical Image Understanding</strong></a><br />
-        <div class="authors"><span class="me">Christina Liu</span>, Alan Wang, Joy Hsu, Jiajun Wu, Ehsan Adeli</div>
-        <em>Under Review</em><br />
-      </li>
-  
-      <li>
-        <a href="https://openaccess.thecvf.com/content/WACV2025/papers/Khalil_Learning_Keypoints_for_Multi-Agent_Behavior_Analysis_using_Self-Supervision_WACV_2025_paper.pdf" target="_blank">
-          <strong>Learning Keypoints for Multi-Agent Behavior Analysis using Self-Supervision</strong>
-        </a><br />
-        <div class="authors">Daniel Khalil, <span class="me">Christina Liu</span>, Pietro Perona, Jennifer J. Sun, Markus Marks</div>
-        <em>Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV), 2025</em><br />
-      </li>
-  
-      <li>
-        <a href="https://doi.org/10.1039/D0TB02985H" target="_blank">
-          <strong>Potential molecular and graphene oxide chelators to dissolve amyloid-β plaques in Alzheimer's disease: A density functional theory study</strong>
-        </a><br />
-        <div class="authors"><span class="me">Christina Liu</span>, Xuan Luo</div>
-        <em>Journal of Materials Chemistry B, 2021</em><br />
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h3>Teaching</h3>
-    <p><strong>Teaching Assistant for:</strong></p>
-    <ul>
-      <li><a href="https://www.cms.caltech.edu/academics/courses/idsacmcs-157" target="_blank" rel="noopener noreferrer">IDS/ACM/CS 157: Statistical Inference (Spring 2025)</a></li>
-      <li><a href="https://www.ee.caltech.edu/academics/courses/cmscscnseeids-155" target="_blank" rel="noopener noreferrer">CMS/CS/CNS/EE/IDS 155: Machine Learning and Data Mining (Winter 2025)</a></li>
-      <li><a href="https://www.cms.caltech.edu/academics/courses/cscnsee-156-ab" target="_blank" rel="noopener noreferrer">CS/CNS/EE 156a: Learning Systems (Fall 2024)</a></li>
-      <li><a href="https://www.cms.caltech.edu/academics/courses/cs-38" target="_blank" rel="noopener noreferrer">CS 38: Algorithms (Spring 2024)</a></li>
-    </ul>
-  </section>
-  </main>
+    <!-- RESEARCH -->
+    <section id="research" class="fade-up">
+      <div class="section-rule"><span class="section-label">Research &amp; Publications</span></div>
+      <ul class="pub-list">
 
-  <footer>
-    © 2025 Christina Liu
-  </footer>
+        <li class="pub-item">
+          <span class="pub-year">2024</span>
+          <div class="pub-body">
+            <span class="pub-title">A Tool Bottleneck Framework for Clinically-Informed and Interpretable Medical Image Understanding</span>
+            <p class="pub-authors">
+              <span class="me">Christina Liu</span>*, Alan Wang*, Joy Hsu, Jiajun Wu, Ehsan Adeli
+            </p>
+            <p class="pub-venue">Under Review <span class="pub-badge">Preprint</span></p>
+            <p class="pub-equal">*Equal contribution</p>
+            <p class="pub-links">
+              <a class="pub-link" href="https://www.arxiv.org/abs/2512.21414" target="_blank">Paper ↗</a>
+              <a class="pub-link" href="#" target="_blank">Project Page ↗</a>
+            </p>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <span class="pub-year">2025</span>
+          <div class="pub-body">
+            <span class="pub-title">Learning Keypoints for Multi-Agent Behavior Analysis using Self-Supervision</span>
+            <p class="pub-authors">
+              Daniel Khalil, <span class="me">Christina Liu</span>, Pietro Perona, Jennifer J. Sun, Markus Marks
+            </p>
+            <p class="pub-venue">IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)</p>
+            <p class="pub-links">
+              <a class="pub-link" href="https://openaccess.thecvf.com/content/WACV2025/papers/Khalil_Learning_Keypoints_for_Multi-Agent_Behavior_Analysis_using_Self-Supervision_WACV_2025_paper.pdf" target="_blank">Paper ↗</a>
+              <a class="pub-link" href="https://danielpkhalil.github.io/B-KinD-Multi/" target="_blank">Project Page ↗</a>
+            </p>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <span class="pub-year">2021</span>
+          <div class="pub-body">
+            <span class="pub-title">Potential molecular and graphene oxide chelators to dissolve amyloid-β plaques in Alzheimer's disease: A density functional theory study</span>
+            <p class="pub-authors">
+              <span class="me">Christina Liu</span>, Xuan Luo
+            </p>
+            <p class="pub-venue">Journal of Materials Chemistry B</p>
+            <p class="pub-links">
+              <a class="pub-link" href="https://doi.org/10.1039/D0TB02985H" target="_blank">Paper ↗</a>
+            </p>
+          </div>
+        </li>
+
+      </ul>
+    </section>
+
+    <!-- TEACHING -->
+    <section id="teaching" class="fade-up">
+      <div class="section-rule"><span class="section-label">Teaching</span></div>
+      <div class="teaching-grid">
+
+        <a class="teaching-card" href="https://www.cms.caltech.edu/academics/courses/idsacmcs-157" target="_blank" rel="noopener noreferrer">
+          <p class="teaching-term">Spring 2025 · TA</p>
+          <p class="teaching-course">IDS/ACM/CS 157: Statistical Inference</p>
+        </a>
+
+        <a class="teaching-card" href="https://www.ee.caltech.edu/academics/courses/cmscscnseeids-155" target="_blank" rel="noopener noreferrer">
+          <p class="teaching-term">Winter 2025 · TA</p>
+          <p class="teaching-course">CMS/CS/CNS/EE/IDS 155: Machine Learning &amp; Data Mining</p>
+        </a>
+
+        <a class="teaching-card" href="https://www.cms.caltech.edu/academics/courses/cscnsee-156-ab" target="_blank" rel="noopener noreferrer">
+          <p class="teaching-term">Fall 2024 · TA</p>
+          <p class="teaching-course">CS/CNS/EE 156a: Learning Systems</p>
+        </a>
+
+        <a class="teaching-card" href="https://www.cms.caltech.edu/academics/courses/cs-38" target="_blank" rel="noopener noreferrer">
+          <p class="teaching-term">Spring 2024 · TA</p>
+          <p class="teaching-course">CS 38: Algorithms</p>
+        </a>
+
+      </div>
+    </section>
+
+  </div><!-- /.content -->
+
+  <footer>© 2025 Christina Liu · California Institute of Technology</footer>
+
+  <script>
+    // Intersection Observer for fade-up
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.fade-up').forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.1) + 's';
+      observer.observe(el);
+    });
+  </script>
+
 </body>
 </html>
