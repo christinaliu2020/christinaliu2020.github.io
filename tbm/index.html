@@ -358,6 +358,17 @@
 <hr />
 
 <section>
+  
+  <figure class="figure">
+      <img src="tbm_fig.jpg" alt="TBF Overview">
+      <figcaption>
+      <strong>Figure 1.</strong> Overview of the Tool Bottleneck Framework. A VLM selects tools from a pre-specified toolbox of clinically-relevant tools. These tools are passed to a Tool Bottleneck Model, which composes and fuses the tool outputs to make a prediction.
+    </figcaption>
+  </figure>
+</section>
+
+<hr />
+<section>
   <h2>Abstract</h2>
   <p>
     Recent tool-use frameworks powered by vision-language models (VLMs) improve image understanding by grounding model predictions with specialized tools. Broadly, these frameworks leverage VLMs and a pre-specified toolbox to decompose the prediction task into multiple tool calls (often deep learning models) which are composed to make a prediction. The dominant approach to composing tools is using text, via function calls embedded in VLM-generated code or natural language. However, these methods often perform poorly on medical image understanding, where salient information is encoded as spatially-localized features that are difficult to compose or fuse via text alone.
@@ -378,12 +389,6 @@
 
   <p><strong>3. Tool Bottleneck Model (TBM).</strong> Selected tool outputs are rasterized into multi-channel spatial maps, concatenated, and passed through a CNN predictor. Trained with <em>tool knockout augmentation</em>, the TBM learns to handle any arbitrary subset of tools at inference time. All tools are frozen; only the TBM is learned.</p>
 
-  <figure class="figure">
-      <img src="tbm_fig.jpg" alt="TBF Overview">
-      <figcaption>
-      <strong>Figure 1.</strong> Overview of the Tool Bottleneck Framework. A VLM selects tools from a pre-specified toolbox of clinically-relevant tools. These tools are passed to a Tool Bottleneck Model, which composes and fuses the tool outputs to make a prediction.
-    </figcaption>
-  </figure>
 
 </section>
 
