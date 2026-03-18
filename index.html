@@ -9,14 +9,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #1a1a2e;
-      --ink-soft: #3d3d5c;
-      --ink-muted: #8888aa;
-      --accent: #b5874a;
-      --accent-light: #f5ede0;
-      --bg: #fafaf8;
-      --bg-warm: #f4f2ec;
-      --rule: #e2ddd6;
+      --ink: #1a0a0e;
+      --ink-soft: #4a2030;
+      --ink-muted: #9e7080;
+      --accent: #7c1d2e;
+      --accent-light: #fdf0f2;
+      --bg: #fdfaf9;
+      --bg-warm: #f9f0f2;
+      --rule: #f0dde0;
       --white: #ffffff;
     }
 
@@ -33,7 +33,6 @@
       font-weight: 300;
     }
 
-    /* ── FADE-IN ── */
     .fade-up {
       opacity: 0;
       transform: translateY(22px);
@@ -41,7 +40,6 @@
     }
     .fade-up.visible { opacity: 1; transform: none; }
 
-    /* ── TOP BAR ── */
     .topbar {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -79,22 +77,17 @@
     }
     .topbar-links a:hover { color: var(--accent); }
 
-    /* ── HERO ── */
     .hero {
-      padding: 120px 0 70px;
+      padding: 120px 2.5rem 70px;
       max-width: 1000px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 180px 1fr;
       gap: 3.5rem;
       align-items: start;
-      padding-left: 2.5rem;
-      padding-right: 2.5rem;
     }
 
-    .hero-photo-wrap {
-      position: relative;
-    }
+    .hero-photo-wrap { position: relative; }
     .hero-photo-wrap::before {
       content: '';
       position: absolute;
@@ -136,24 +129,27 @@
       margin-bottom: 0.8rem;
     }
 
-    .hero-desc {
-      font-size: 0.93rem;
-      color: var(--ink-soft);
-      max-width: 520px;
-      margin-bottom: 1.5rem;
-    }
-    .hero-desc a {
-      color: var(--ink-soft);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-color: var(--accent);
-    }
-    .hero-desc a:hover { color: var(--accent); }
-
     .hero-cta-row {
       display: flex;
-      gap: 0.75rem;
+      gap: 0.85rem;
       flex-wrap: wrap;
+      align-items: center;
+    }
+    .cta-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .cta-icon:hover {
+      border-color: var(--accent);
+      color: var(--accent);
     }
     .cta-link {
       display: inline-flex;
@@ -168,11 +164,6 @@
       border-radius: 2px;
       transition: all 0.2s;
     }
-    .cta-link.primary {
-      background: var(--ink);
-      color: var(--white);
-    }
-    .cta-link.primary:hover { background: var(--accent); }
     .cta-link.secondary {
       border: 1px solid var(--rule);
       color: var(--ink-soft);
@@ -183,7 +174,6 @@
       color: var(--accent);
     }
 
-    /* ── MAIN CONTENT ── */
     .content {
       max-width: 1000px;
       margin: 0 auto;
@@ -213,7 +203,6 @@
 
     section { margin-bottom: 3.5rem; }
 
-    /* ── ABOUT ── */
     .about-text {
       font-size: 1rem;
       color: var(--ink-soft);
@@ -229,7 +218,6 @@
     }
     .about-text a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
-    /* ── PUBLICATIONS ── */
     .pub-list { list-style: none; display: flex; flex-direction: column; gap: 1.75rem; }
 
     .pub-item {
@@ -254,7 +242,6 @@
       min-width: 36px;
       text-align: right;
     }
-    .pub-body {}
     .pub-title {
       font-size: 0.94rem;
       font-weight: 500;
@@ -285,6 +272,7 @@
       font-style: italic;
       margin-bottom: 0.2rem;
     }
+    .pub-links { margin-top: 0.45rem; display: flex; gap: 1rem; }
     .pub-link {
       font-size: 0.78rem;
       font-weight: 500;
@@ -293,6 +281,7 @@
       letter-spacing: 0.03em;
     }
     .pub-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .pub-badge {
       display: inline-block;
       font-size: 0.68rem;
       font-weight: 500;
@@ -306,7 +295,6 @@
       vertical-align: middle;
     }
 
-    /* ── TEACHING ── */
     .teaching-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -340,7 +328,6 @@
       line-height: 1.35;
     }
 
-    /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--rule);
       padding: 1.6rem 2.5rem;
@@ -350,14 +337,12 @@
       letter-spacing: 0.04em;
     }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
-      .hero { grid-template-columns: 1fr; gap: 2rem; }
+      .hero { grid-template-columns: 1fr; gap: 2rem; padding: 100px 1.2rem 50px; }
       .hero-photo-wrap { width: fit-content; }
       .hero-name { font-size: 2.6rem; }
       .topbar { padding: 0 1.2rem; }
       .topbar-links { gap: 1rem; }
-      .hero { padding-left: 1.2rem; padding-right: 1.2rem; }
       .content { padding-left: 1.2rem; padding-right: 1.2rem; }
       .pub-item { grid-template-columns: 1fr; gap: 0.3rem; }
       .pub-year { text-align: left; }
@@ -366,18 +351,15 @@
 </head>
 <body>
 
-  <!-- TOP BAR -->
   <nav class="topbar">
     <a class="topbar-name" href="#">Christina Liu</a>
     <ul class="topbar-links">
       <li><a href="#about">About</a></li>
       <li><a href="#research">Research</a></li>
       <li><a href="#teaching">Teaching</a></li>
-      <!-- <li><a href="cv.pdf" target="_blank">CV</a></li> -->
     </ul>
   </nav>
 
-  <!-- HERO -->
   <div class="hero fade-up">
     <div class="hero-photo-wrap">
       <img src="headshot.jpg" alt="Christina Liu" class="hero-photo" />
@@ -386,17 +368,21 @@
       <p class="hero-eyebrow">Computer Science · Caltech</p>
       <h1 class="hero-name">Christina<br>Liu</h1>
       <div class="hero-cta-row">
-        <a class="cta-link secondary" href="https://linkedin.com/in/christina--liu" target="_blank">LinkedIn</a>
-        <a class="cta-link secondary" href="https://scholar.google.com/citations?user=z6kD090AAAAJ&hl=en" target="_blank">Google Scholar</a>
-        <!-- <a class="cta-link secondary" href="cv.pdf" target="_blank">CV</a> -->
+        <a class="cta-icon" href="mailto:cliu7@caltech.edu" title="Email">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </a>
+        <a class="cta-icon" href="https://linkedin.com/in/christina--liu" target="_blank" title="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a class="cta-icon" href="https://scholar.google.com/citations?user=z6kD090AAAAJ&hl=en" target="_blank" title="Google Scholar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14 2 8l10-6 10 6-10 6z"/><path d="M6 11v5c0 1.657 2.686 3 6 3s6-1.343 6-3v-5"/><path d="M20 8v8"/></svg>
+        </a>
       </div>
     </div>
   </div>
 
-  <!-- MAIN -->
   <div class="content">
 
-    <!-- ABOUT -->
     <section id="about" class="fade-up">
       <div class="section-rule"><span class="section-label">About</span></div>
       <p class="about-text">
@@ -411,7 +397,6 @@
       </p>
     </section>
 
-    <!-- RESEARCH -->
     <section id="research" class="fade-up">
       <div class="section-rule"><span class="section-label">Research &amp; Publications</span></div>
       <ul class="pub-list">
@@ -464,7 +449,6 @@
       </ul>
     </section>
 
-    <!-- TEACHING -->
     <section id="teaching" class="fade-up">
       <div class="section-rule"><span class="section-label">Teaching</span></div>
       <div class="teaching-grid">
@@ -492,12 +476,11 @@
       </div>
     </section>
 
-  </div><!-- /.content -->
+  </div>
 
   <footer>© 2025 Christina Liu · California Institute of Technology</footer>
 
   <script>
-    // Intersection Observer for fade-up
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
